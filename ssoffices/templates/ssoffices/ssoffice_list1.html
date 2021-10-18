@@ -1,0 +1,11 @@
+<h1>SS Offices</h1>
+
+====
+{{ request}}
+====
+
+<ul>
+{% for ssoffice in object_list %}
+    <li>{{ ssoffice.display_name}}  {{ssoffice.tel_public.as_national }}</li>
+{% endfor %}
+</ul>

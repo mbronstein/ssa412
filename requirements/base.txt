@@ -12,6 +12,9 @@ django-contrib-comments
 django-taggit
 django-extensions
 django-filter
+django-phonenumber-field
+phonenumbers
+
 
 
 # Django
