@@ -329,5 +329,5 @@ mybasetemplate1/media/
 .pytest_cache/
 
 ## added by MB
-!/.env
+/.env
 
