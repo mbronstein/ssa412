@@ -5,7 +5,7 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget, Ph
 
 
 class SsOfficeFormAdmin(admin.ModelAdmin):
-    list_display = ('slug', 'type', 'site_code', 'ssa_office_name','display_name','tel_public', 'fax',
+    list_display = ('slug', 'type', 'ssa_site_code', 'ssa_office_name','display_name','tel_public', 'fax',
                     'address1', 'address2', 'city', 'state', 'zipcode','region', 'ssa_last_updated')
 
     search_fields = ('slug', 'type')

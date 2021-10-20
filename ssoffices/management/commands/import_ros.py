@@ -17,7 +17,7 @@ class Command(BaseCommand):
                     newSSO = SsOffice()
                     #office_code as is
                     setattr(newSSO, "type", o.get("type", ""))
-                    setattr(newSSO, "site_code", o.get("sitecode", ""))
+                    setattr(newSSO, "ssa_site_code", o.get("sitecode", ""))
                     # setattr(newSSO, "ssa_office_name", o.get("ssa_office_name", ""))
                     setattr(newSSO, "address1", o.get("address1", "").title())
                     setattr(newSSO, "address2", o.get("address2", "").title())

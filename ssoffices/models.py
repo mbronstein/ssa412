@@ -43,11 +43,10 @@ class SsOffice(models.Model):
     type = models.CharField(max_length=30, choices=SsOfficeTypes.choices, null=True, blank=True)
     slug = models.CharField(max_length=50, null=True, blank=True, unique=True)
     display_name = models.CharField(max_length=50, null=True)
-    site_code = models.CharField(max_length=128, null=True)
+    ssa_site_code = models.CharField(max_length=128, null=True)
     ssa_office_name = models.CharField(max_length=128, null=True, blank=True)
     region = models.CharField(max_length=20, null=True, blank=True)
-
-    ssa_last_updated = models.DateField(null=True)
+    ssa_last_updated = models.CharField(max_length=50, null=True, blank=True)
     # lookup_name = models.CharField(max_length=128)
     address1 = models.CharField(max_length=128, null=True, blank=True)
     address2 = models.CharField(max_length=128, null=True, blank=True)

@@ -36,15 +36,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 
+DJANGO_SECRET_KEY = env.str("DJANGO_SECRET_KEY")
+
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES =  {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ROOT_DIR / 'db.sqlite3',
-    }
+# Parse database connection url strings
+# like psql://user:pass@127.0.0.1:8458/db
+DATABASES = {
+    #see django-environ for env.db()
+    'default': env.db(),
 }
 
 # URLS
@@ -226,13 +228,20 @@ X_FRAME_OPTIONS = "DENY"
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND",
+    "EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
+EMAIL_HOST= env('EMAIL_HOST')
+EMAIL_USE_TLS= env('EMAIL_USE_TLS')
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
+PDFTK_PATH = env('PDFTK_PATH')
 # ADMIN
+
 # ------------------------------------------------------------------------------
 # Django Admin URL.
 ADMIN_URL = "admin/"
@@ -295,3 +304,5 @@ REST_FRAMEWORK = {
 CORS_URLS_REGEX = r"^/api/.*$"
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
