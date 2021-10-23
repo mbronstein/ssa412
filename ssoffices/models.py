@@ -39,7 +39,7 @@ class SsOffice(models.Model):
         NCAC = ('NCAC', "National Case Assistance Center (NCAC")
         WSU = ('WSU', "Workload Support Unit (WSU)")
 
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+    id = models.BigAutoField(primary_key=True)
     type = models.CharField(max_length=30, choices=SsOfficeTypes.choices, null=True, blank=True)
     slug = models.CharField(max_length=50, null=True, blank=True, unique=True)
     display_name = models.CharField(max_length=50, null=True)
@@ -154,3 +154,55 @@ class SsStaff(models.Model):
 
     def display_name(self):
         return f"{self.last_name}, {self.first_name}, {self.staff_type}"
+
+
+class Expert(models.Model):
+
+    class Meta:
+        app_label = "ssoffices"
+        verbose_name = "Expert"
+        verbose_name_plural = "Experts"
+        ordering = ['last_name', 'first_name']
+
+    class ExpertTypes(models.TextChoices):
+        VE = ('VE', "Vocational Expert")
+        MA = ('MA', "Medical Advisor")
+        CE = ('CE', "Consulative Examiner")
+    first_name = models.CharField(max_length=128, blank=True, null=True)
+    last_name = models.CharField(max_length=255, null=False, blank=False)
+    type = models.CharField(max_length=10, choices=ExpertTypes.choices)
+    is_active = models.BooleanField(default=True)
+    specialty= models.CharField(max_length=128, null=True, blank=True)
+    board_certifications = models.CharField(max_length=128, null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    organization = models.CharField( max_length=255, null=True, blank=True)
+    title = models.CharField(max_length=128,  blank=True, null=True)
+    primary_email = models.EmailField(blank=True, null=True)
+    secondary_email = models.EmailField( null=True, blank=True)
+    mobile_number = PhoneNumberField(null=True, unique=True)
+    secondary_number = PhoneNumberField(null=True, blank=True)
+    address_line1 = models.CharField(max_length=128, null=True)
+    address_line2 = models.CharField(max_length=128, null=True)
+    city = models.CharField(max_length=128, null=True, blank=True)
+    state = models.CharField(max_length=128, null=True, blank=True)
+    zipcode = models.CharField(max_length=128, null=True, blank=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = PhoneNumberField(null=True, blank=True)
+    phone_ext = models.CharField(max_length=80,blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    resume = models.FileField()
+    resume_last_updated =models.DateField(null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    last_modified_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                         on_delete=models.CASCADE,
+                                         related_name='+',
+                                         null=True,
+                                         )
+
+    def __str__(self):
+        return f"{self.last_name}, {self.first_name}, {self.type}"
+
+    def __repr__(self):
+        return f"{self.last_name}, {self.first_name}, {self.type}"
+

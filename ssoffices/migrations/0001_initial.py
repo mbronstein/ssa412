@@ -19,8 +19,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SsOffice',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('type', models.CharField(blank=True, choices=[('FO', 'Field Office (FO)'), ('DDS', 'Disability Determination Services (DDS)'), ('OHO', 'Office of Hearings Operations (OHO)'), ('AC', 'Appeals Council (AC)'), ('PC', 'Program Service Center (PSC)'), ('RO', 'Regional Office (RO)'), ('NHC', 'National Hearing Center (NHC)'), ('CSU', 'Central Scheduling Unit (CSU)'), ('NCAC', 'National Case Assistance Center (NCAC'), ('WSU', 'Workload Support Unit (WSU)')], max_length=30, null=True)),
+                ('id', models.BigAutoField(primary_key=True)),
+                ('type', models.CharField(blank=True, choices=[('FO', 'Field Office (FO)'),
+                                                               ('DDS', 'Disability Determination Services (DDS)'),
+                                                               ('OHO', 'Office of Hearings Operations (OHO)'),
+                                                               ('AC', 'Appeals Council (AC)'),
+                                                               ('PC', 'Program Service Center (PSC)'),
+                                                               ('RO', 'Regional Office (RO)'),
+                                                               ('NHC', 'National Hearing Center (NHC)'),
+                                                               ('CSU', 'Central Scheduling Unit (CSU)'),
+                                                               ('NCAC', 'National Case Assistance Center (NCAC'),
+                                                               ('WSU', 'Workload Support Unit (WSU)')],
+                                          max_length=30, null=True)),
                 ('slug', models.CharField(blank=True, max_length=50, null=True, unique=True)),
                 ('display_name', models.CharField(max_length=50, null=True)),
                 ('ssa_site_code', models.CharField(max_length=128, null=True)),
@@ -54,7 +64,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SsStaff',
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
+                ('id', models.BigAutoField(primary_key=True)),
                 ('staff_type', models.CharField(blank=True, choices=[('ADM', 'Asst District Manager, FO'), ('ALJ', 'Administrative Law Judge, OHO'), ('CR', 'Claims Representative, FO'), ('DE', 'Disability Examiner, DDS'), ('DM', 'District Manager, FO'), ('GS', 'Group Supervisor, OHO'), ('HA', 'Hearing Asst, OHO'), ('HOD', 'Hearing Office Director'), ('OHO', 'Office of Hearings Operations'), ('OS', 'Operations Supervisor, FO'), ('PCS', 'Program Service Center Staff'), ('SA', 'Staff Attorney, OHO'), ('VDE', 'Vocational Disability Examiner, DDS'), ('CSU', 'CSU Staff')], max_length=20)),
                 ('first_name', models.CharField(blank=True, max_length=128)),
                 ('last_name', models.CharField(max_length=128)),
@@ -69,7 +79,7 @@ class Migration(migrations.Migration):
                 ('created_by', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),
                 ('last_modified_by', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),
                 ('ss_office', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ssoffices.ssoffice')),
-                ('supervisor', models.ManyToManyField(blank=True, to='ssoffices.SsStaff')),
+                # ('supervisor', models.ManyToManyField(blank=True, to='ssoffices.SsStaff')),
             ],
             options={
                 'verbose_name': 'SSA Staff',
