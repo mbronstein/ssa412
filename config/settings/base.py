@@ -83,6 +83,7 @@ THIRD_PARTY_APPS = [
     "taggit",
     "django_extensions",
     "django_filters",
+    "post_office",
 ]
 
 LOCAL_APPS = [
@@ -231,6 +232,10 @@ EMAIL_BACKEND = env(
     "EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
 )
+
+POST_OFFICE = {
+    'DEFAULT_PRIORITY' : 'now'
+}
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 EMAIL_HOST= env('EMAIL_HOST')
