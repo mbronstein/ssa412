@@ -1,4 +1,4 @@
-mybasetemplate1
+ssa412
 ===============
 
 My  Base CC template
@@ -40,7 +40,7 @@ Running type checks with mypy:
 
 ::
 
-  $ mypy mybasetemplate1
+  $ mypy ssa412
 
 Test coverage
 ^^^^^^^^^^^^^
