@@ -115,7 +115,8 @@ class SsStaff(models.Model):
 
     id = models.AutoField(primary_key=True)
     ss_office = models.ForeignKey(SsOffice,
-                                  on_delete=models.CASCADE, related_name='office')
+                                  on_delete=models.CASCADE,
+                                  related_name='office')
     staff_type = models.CharField(choices=StaffTypes.choices,
                                   max_length = 20,
                                   blank = True)
@@ -146,10 +147,10 @@ class SsStaff(models.Model):
                                          )
 
     def __str__(self):
-        return f"{self.last_name}, {self.first_name}, {self.staff_type},{self.ss_office}"
+        return f"{self.last_name}, {self.first_name}, {self.staff_type}"  #todo add office ref
 
     def __repr__(self):
-        return f"{self.last_name}, {self.first_name}, {self.staff_type}, {self.ss_office}"
+        return f"{self.last_name}, {self.first_name}, {self.staff_type}"
 
     def display_name(self):
         return f"{self.last_name}, {self.first_name}, {self.staff_type}"
