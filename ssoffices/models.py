@@ -113,10 +113,9 @@ class SsStaff(models.Model):
         CSU = ('CSU', "CSU Staff")
 
 
-    id = models.UUIDField(default=uuid.uuid4,
-                          primary_key=True)
+    id = models.AutoField(primary_key=True)
     ss_office = models.ForeignKey(SsOffice,
-                                  on_delete=models.CASCADE)
+                                  on_delete=models.CASCADE, related_name='office')
     staff_type = models.CharField(choices=StaffTypes.choices,
                                   max_length = 20,
                                   blank = True)
@@ -131,7 +130,7 @@ class SsStaff(models.Model):
     tel_ext = models.CharField(max_length=20,
                                blank=True)
     email = models.EmailField(blank=True)
-    supervisor = models.ManyToManyField("SsStaff", blank=True)
+    # supervisor = models.ManyToManyField("SsStaff", blank=True)
     notes = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

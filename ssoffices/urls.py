@@ -1,6 +1,5 @@
 from django.urls import path
 
-from ss411.ssoffices import views
 
 app_name = 'ssoffices'
 

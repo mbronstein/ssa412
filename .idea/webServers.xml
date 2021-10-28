@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9e908e4b-d729-4a1c-9ac6-b67b97283e89" name="DO-nextcloud" url="http://45.55.44.110/">
+        <fileTransfer rootFolder="/home/mark/projects/ssa412" accessType="SFTP" host="45.55.44.110" port="22" sshConfigId="c40b6392-d752-4a17-a7c1-8b6145981a97" sshConfig="root@45.55.44.110:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
