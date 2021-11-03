@@ -3,15 +3,6 @@ from .base import env
 
 # GENERAL
 # ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY",
-    default="4YnmF549hZVjF0nMlL2WBg5UXyi92iayzUO9AmLc2i7ukf9CPgx8I4FJkfXoxbSt",
-)
-# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -27,7 +18,7 @@ CACHES = {
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+    "EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
 )
 
 # WhiteNoise
@@ -53,3 +44,7 @@ INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+SHELL_PLUS_POST_IMPORTS = (
+    ('ssoffices.api.serializers', '*'),
+    ('ssoffices.api.views', '*')
+)

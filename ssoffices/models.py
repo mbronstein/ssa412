@@ -116,7 +116,7 @@ class SsStaff(models.Model):
     id = models.AutoField(primary_key=True)
     ss_office = models.ForeignKey(SsOffice,
                                   on_delete=models.CASCADE,
-                                  related_name='office')
+                                  related_name='ss_office')
     staff_type = models.CharField(choices=StaffTypes.choices,
                                   max_length = 20,
                                   blank = True)
@@ -125,8 +125,9 @@ class SsStaff(models.Model):
     last_name = models.CharField(max_length=128)
     salutation = models.CharField(max_length=128,
                                   blank=True)
-    familiar_name = models.CharField(max_length=128,
-                                     blank=True)
+    honorific = models.CharField(max_length=128,
+                                     blank=True,
+                                     null=True,)
     tel = PhoneNumberField(blank=True)
     tel_ext = models.CharField(max_length=20,
                                blank=True)
@@ -150,7 +151,7 @@ class SsStaff(models.Model):
         return f"{self.last_name}, {self.first_name}, {self.staff_type}"  #todo add office ref
 
     def __repr__(self):
-        return f"{self.last_name}, {self.first_name}, {self.staff_type}"
+        return f"{self.last_name}, {self.first_name}: {self.id} ({self.staff_type})"
 
     def display_name(self):
         return f"{self.last_name}, {self.first_name}, {self.staff_type}"

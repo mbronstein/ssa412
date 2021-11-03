@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
                 ('first_name', models.CharField(blank=True, max_length=128)),
                 ('last_name', models.CharField(max_length=128)),
                 ('salutation', models.CharField(blank=True, max_length=128)),
-                ('familiar_name', models.CharField(blank=True, max_length=128)),
+                ('honorific', models.CharField(blank=True, max_length=30)),
                 ('tel', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, region=None)),
                 ('tel_ext', models.CharField(blank=True, max_length=20)),
                 ('email', models.EmailField(blank=True, max_length=254)),

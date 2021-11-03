@@ -1,11 +1,17 @@
 from django.contrib import admin
 from phonenumber_field.modelfields import PhoneNumberField
-from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
-
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 from .models import SsOffice, SsStaff
 
 
+class SsStaffInline(admin.TabularInline):
+    model = SsStaff
+    fields = ('last_name', 'first_name', 'tel', 'tel_ext')
+    # formfield_overrides = {
+    #     PhoneNumberField: {'widget': PhoneNumberPrefixWidget},
+    # }
 class SsOfficeFormAdmin(admin.ModelAdmin):
+    inlines = [SsStaffInline,]
     list_display = ('slug', 'type', 'ssa_site_code', 'ssa_office_name', 'display_name',
                     'tel_public', 'fax', 'address1', 'address2', 'city', 'state', 'zipcode',
                     'region', 'ssa_last_updated')
@@ -13,11 +19,12 @@ class SsOfficeFormAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'type')
     ordering = ["slug"]
 
-    formfield_overrides = {
-        PhoneNumberField: {'widget': PhoneNumberInternationalFallbackWidget},
-    }
+    # formfield_overrides = {
+    #     PhoneNumberField: {'widget': PhoneNumberPrefixWidget},
+    # }
     list_filter = ('type', 'state', 'region')
     list_editable = ("tel_public", "fax")
+
 
 
 admin.site.register(SsOffice, SsOfficeFormAdmin)
@@ -31,12 +38,12 @@ class SsStaffFormAdmin(admin.ModelAdmin):
     list_display = ('display_name', 'ss_office', 'tel', 'tel_ext', 'staff_type',
                     'email', 'notes',
                     )
-    list_filter = ('region', 'last_name')
+    list_filter = ('last_name', 'ss_office')
 
-    formfield_overrides = {
-        PhoneNumberField: {'widget': PhoneNumberInternationalFallbackWidget},
-    }
-    list_filter = ('ss_office', 'staff_type')
+    # formfield_overrides = {
+    #     PhoneNumberField: {'widget': PhoneNumberPrefixWidget},
+    # }
+
     # list_editable = ("tel_public", "fax")
 
 

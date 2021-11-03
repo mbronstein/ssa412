@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from ss411.ssoffices.models import SsOffice
+from ssoffices.models import SsOffice
 import os
 import csv
 

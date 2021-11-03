@@ -17,11 +17,8 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool("DJANGO_DEBUG", False)
-# Local time zone. Choices are
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# though not all of them may be available with every OS.
-# In Windows, this must be set to your system time zone.
+# DEBUG = env.bool("DEBUG")
+DEBUG = True
 TIME_ZONE = "UTC"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
@@ -36,7 +33,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 
-DJANGO_SECRET_KEY = env.str("DJANGO_SECRET_KEY")
+SECRET_KEY = env.str("SECRET_KEY")
 
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -251,7 +248,7 @@ PDFTK_PATH = env('PDFTK_PATH')
 # Django Admin URL.
 ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [("""Mark Bronstein""", "mark@bronsteinlaw.com")]
+ADMINS = [("Mark Bronstein", "mark@bronsteinlaw.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
@@ -311,3 +308,6 @@ CORS_URLS_REGEX = r"^/api/.*$"
 # ------------------------------------------------------------------------------
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# settings for django-phonenumber_field
+PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL'
