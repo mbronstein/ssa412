@@ -17,6 +17,7 @@ django-extensions
 django-filter
 django-phonenumber-field
 phonenumbers
+django-import-export
 
 
 

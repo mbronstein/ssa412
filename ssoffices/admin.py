@@ -1,6 +1,7 @@
 from django.contrib import admin
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
+from import_export.admin import ImportExportModelAdmin
 from .models import SsOffice, SsStaff
 
 
@@ -30,7 +31,7 @@ class SsOfficeFormAdmin(admin.ModelAdmin):
 admin.site.register(SsOffice, SsOfficeFormAdmin)
 
 
-class SsStaffFormAdmin(admin.ModelAdmin):
+class SsStaffFormAdmin(ImportExportModelAdmin):
     readonly_fields = ('created_by', 'last_modified_by')
     search_fields = ["last_name", "ss_office"]
     ordering = ["last_name", "first_name", "ss_office"]
@@ -40,11 +41,13 @@ class SsStaffFormAdmin(admin.ModelAdmin):
                     )
     list_filter = ('last_name', 'ss_office')
 
+    #
     # formfield_overrides = {
-    #     PhoneNumberField: {'widget': PhoneNumberPrefixWidget},
-    # }
+    #     PhoneNumberField: {'widget': PhoneNumberInternationalFallbackWidget},
+    # # }
 
     # list_editable = ("tel_public", "fax")
+
 
 
 admin.site.register(SsStaff, SsStaffFormAdmin)

@@ -81,6 +81,7 @@ THIRD_PARTY_APPS = [
     "django_extensions",
     "django_filters",
     "post_office",
+    "import_export",
 ]
 
 LOCAL_APPS = [
@@ -311,3 +312,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # settings for django-phonenumber_field
 PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL'
+PHONENUMBER_DEFAULT_REGION = 'US'
+
+#settings for django-import-export
+IMPORT_EXPORT_USE_TRANSACTIONS=True
