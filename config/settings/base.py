@@ -14,26 +14,22 @@ if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / ".env"))
 
-# GENERAL
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#debug
-# DEBUG = env.bool("DEBUG")
-DEBUG = True
+DEBUG = env.str("DEBUG")
+
+SECRET_KEY = env.str("SECRET_KEY")
+USE_TZ = True
 TIME_ZONE = "UTC"
-# https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
-# https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
+
+#local related probably dont need
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
 USE_L10N = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
-USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 
-SECRET_KEY = env.str("SECRET_KEY")
 
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -62,10 +58,10 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
     "grappelli",
+    # "django.contrib.humanize", # Handy template tags
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",

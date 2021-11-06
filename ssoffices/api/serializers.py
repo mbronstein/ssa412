@@ -9,11 +9,12 @@ class SsOfficeSerializer(serializers.ModelSerializer):
 
 
 class SsStaffSerializer(serializers.ModelSerializer):
-    ss_office = SsOfficeSerializer(read_only=True)
+    ssoffice = SsOfficeSerializer(read_only=False)
 
     class Meta:
         model = SsStaff
-        fields = ('id', 'staff_type', 'first_name', 'last_name', 'salutation',
-                  'honorific', 'tel', 'tel_ext', 'email', 'ss_office',
+        fields = ('id', 'type', 'first_name', 'last_name', 'salutation',
+                  'honorific', 'tel', 'tel_ext', 'email', 'ssoffice',
                   'notes', 'modified'
                   )
+

@@ -16,4 +16,4 @@ class SsStaffViewSet(ModelViewSet):
     serializer_class = SsStaffSerializer
     queryset = SsStaff.objects.all()
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['last_name', ]
+    filterset_fields = ['last_name' ]

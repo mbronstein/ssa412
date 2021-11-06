@@ -3,5 +3,4 @@ from django.forms import ModelForm
 
 
 class SendFaxForm(ModelForm):
-
-
+    pass
