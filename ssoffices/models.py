@@ -133,6 +133,7 @@ class SsStaff(models.Model):
                                blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     # supervisor = models.ManyToManyField("SsStaff", blank=True)
+    personal_fax = PhoneNumberField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True, null=True, blank=True)

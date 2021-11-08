@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="C:\Users\mark\Downloads\Matters_List.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="C:\Users\mark\projects\lomb data\main_ssoffices_ssoffice.csv">
           <value>
             <Attribute>

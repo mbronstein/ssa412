@@ -82,7 +82,8 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "ssa412.users.apps.UsersConfig",
-    "ssoffices.apps.SsofficesConfig"
+    "ssoffices.apps.SsofficesConfig",
+    "matters.apps.MattersConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

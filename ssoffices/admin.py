@@ -10,7 +10,7 @@ class SsStaffInline(admin.TabularInline):
     fields = ('last_name', 'first_name', 'type', 'ssoffice', 'city', 'tel', 'tel_ext')
     list_editable = ('ssoffice')
 
-class SsOfficeFormAdmin(admin.ModelAdmin):
+class SsOfficeAdmin(admin.ModelAdmin):
     inlines = [SsStaffInline,]
     list_display = ('slug', 'type', 'ssa_site_code', 'ssa_office_name', 'display_name',
                     'tel_public', 'fax', 'address1', 'address2', 'city', 'state', 'zipcode',
@@ -27,15 +27,15 @@ class SsOfficeFormAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(SsOffice, SsOfficeFormAdmin)
+admin.site.register(SsOffice, SsOfficeAdmin)
 
 
-class SsStaffFormAdmin(ImportExportModelAdmin):
+class SsStaffAdmin(ImportExportModelAdmin):
     readonly_fields = ('created_by', 'last_modified_by')
     search_fields = ["last_name", "ssoffice"]
     ordering = ["last_name", "first_name", "ssoffice"]
-
-    list_display = ('display_name', 'type', 'ssoffice', 'city','tel', 'tel_ext', 'type',
+    #todo add personal fax
+    list_display = ('display_name', 'type', 'ssoffice', 'city','tel', 'tel_ext',
                     'email', 'notes',
                     )
     list_editable = ('type', 'ssoffice', 'tel', 'tel_ext')
@@ -50,7 +50,7 @@ class SsStaffFormAdmin(ImportExportModelAdmin):
 
 
 
-admin.site.register(SsStaff, SsStaffFormAdmin)
+admin.site.register(SsStaff, SsStaffAdmin)
 #
 # class JurByLocationFormAdmin(admin.ModelAdmin):
 #     readonly_fields = ('modified',)
