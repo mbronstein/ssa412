@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from utility.eager import EagerLoadingMixin
 from ..models import SsOffice, SsStaff
 
 
@@ -8,8 +9,10 @@ class SsOfficeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SsStaffSerializer(serializers.ModelSerializer):
-    ssoffice = SsOfficeSerializer(read_only=False)
+class SsStaffSerializer(serializers.ModelSerializer,EagerLoadingMixin):
+    ssoffice = SsOfficeSerializer(many=False, read_only=False)
+    select_related_fields = ('ssoffice',)
+    prefetch_related_fields = ()
 
     class Meta:
         model = SsStaff

@@ -13,7 +13,8 @@ else:
 
 router.register("users", UserViewSet)
 router.register("ssoffices", SsOfficeViewSet)
-router.register("ssstaff", SsStaffViewSet)
+router.register("ssstaff", SsStaffViewSet, basename="ssstaff")
+# above basename param had to be added for LazyMixin and get_query
 router.register("matters", MatterViewSet)
 # router.register("fax", OutgoingFaxViewSet)
 
