@@ -14,7 +14,6 @@ class SsStaffSerializer(serializers.ModelSerializer):
     class Meta:
         model = SsStaff
         fields = ('id', 'type', 'first_name', 'last_name', 'salutation',
-                  'honorific', 'tel', 'tel_ext', 'email', 'ssoffice',
-                  'notes', 'modified'
+                  'tel', 'tel_ext', 'personal_fax','email', 'ssoffice', 'notes', 'modified'
                   )
 

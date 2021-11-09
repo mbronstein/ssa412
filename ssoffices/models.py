@@ -25,6 +25,7 @@ class SsOffice(models.Model):
         verbose_name = "SS Office"
         verbose_name_plural = "SSA Offices"
 
+
     class SsOfficeTypes(models.TextChoices):
         FO = ('FO', "Field Office (FO)")
         DDS = ('DDS', "Disability Determination Services (DDS)")
@@ -112,6 +113,10 @@ class SsStaff(models.Model):
         verbose_name = "SSA Staff"
         verbose_name_plural = "SSA Staff"
         ordering = ['last_name', 'first_name', 'ssoffice']
+        indexes = [
+            models.Index(fields=['last_name','first_name']),
+            models.Index(fields=['ssoffice']),
+        ]
 
     id = models.AutoField(primary_key=True)
     ssoffice = models.ForeignKey(SsOffice,
