@@ -35,7 +35,6 @@ class Migration(migrations.Migration):
                 ('tel_call_back', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region=None)),
                 ('tel_admin', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region=None)),
                 ('fax', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region=None)),
-                ('efile_fax', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region=None)),
                 ('servicing_states', models.CharField(blank=True, max_length=128, null=True)),
                 ('servicing_fos', models.CharField(blank=True, max_length=128, null=True)),
                 ('servicing_zipcodes', models.CharField(blank=True, max_length=128, null=True)),

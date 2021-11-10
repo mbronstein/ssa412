@@ -57,7 +57,6 @@ class SsOffice(models.Model):
     tel_call_back = PhoneNumberField(blank=True, null=True)
     tel_admin = PhoneNumberField(blank=True, null=True)
     fax = PhoneNumberField(blank=True, null=True)
-    efile_fax = PhoneNumberField(blank=True, null=True)
     servicing_states = models.CharField(max_length=128, null=True, blank=True)
     servicing_fos = models.CharField(max_length=128, null=True, blank=True)
     servicing_zipcodes = models.CharField(max_length=128, null=True, blank=True)
