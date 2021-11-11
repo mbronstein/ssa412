@@ -3,7 +3,7 @@ from ..models import Product
 
 
 
-class ProductySerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
