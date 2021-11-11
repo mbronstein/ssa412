@@ -84,6 +84,7 @@ LOCAL_APPS = [
     "ssa412.users.apps.UsersConfig",
     "ssoffices.apps.SsofficesConfig",
     "matters.apps.MattersConfig",
+    "products.apps.ProductsConfig"
     # Your stuff: custom apps go here
 ]
 
