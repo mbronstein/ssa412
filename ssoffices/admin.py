@@ -7,7 +7,7 @@ from .models import SsOffice, SsStaff
 
 class SsStaffInline(admin.TabularInline):
     model = SsStaff
-    fields = ('last_name', 'first_name', 'type', 'ssoffice', 'tel', 'tel_ext')
+    fields = ('last_name', 'first_name', 'salutation','type', 'ssoffice', 'tel', 'tel_ext')
     list_editable = ('ssoffice', 'type')
 
 class SsOfficeAdmin(admin.ModelAdmin):
@@ -35,7 +35,7 @@ class SsStaffAdmin(ImportExportModelAdmin):
     search_fields = ["last_name", "slug"]
     ordering = ["last_name", 'first_name', "ssoffice"]
     #todo add personal fax
-    list_display = ('last_name', 'first_name', 'type', 'ssoffice','tel', 'tel_ext',
+    list_display = ('last_name', 'first_name', 'type', 'salutation','ssoffice','tel', 'tel_ext',
                     )
     list_editable = ('type', 'ssoffice', 'tel', 'tel_ext')
     # list_filter = ('ssoffice', 'type')
