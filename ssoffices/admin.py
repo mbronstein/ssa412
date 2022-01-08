@@ -1,24 +1,31 @@
 from django.contrib import admin
 from phonenumber_field.modelfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
+from admin_auto_filters.filters import AutocompleteFilter
 from import_export.admin import ImportExportModelAdmin
 from .models import SsOffice, SsStaff
 
 
-class SsStaffInline(admin.TabularInline):
-    model = SsStaff
-    fields = ('last_name', 'first_name', 'salutation','type', 'ssoffice', 'tel', 'tel_ext')
-    list_editable = ('ssoffice', 'type')
+# class SsStaffInline(admin.TabularInline):
+#     model = SsStaff
+#     fields = ('last_name', 'first_name', 'salutation','type', 'ssoffice', 'tel', 'tel_ext')
+#     list_editable = ('ssoffice', 'type')
+
+
+class StateFilter(AutocompleteFilter):
+    title = 'State'
+    field_name = 'state'
 
 class SsOfficeAdmin(admin.ModelAdmin):
-    inlines = [SsStaffInline,]
+
+    # inlines = [SsStaffInline,]
     list_display = ('slug', 'type', 'ssa_site_code', 'ssa_office_name', 'display_name',
                     'tel_public', 'fax', 'address1', 'address2', 'city', 'state', 'zipcode',
                     'region', 'ssa_last_updated')
     list_editable = ("tel_public", "fax")
-    search_fields = ('slug', )
+    search_fields = ['state', 'type']
     ordering = ["slug"]
-    list_filter = ('type', 'state', 'region')
+    listfilter = StateFilter
 
     # formfield_overrides = {
     #     PhoneNumberField: {'widget': PhoneNumberPrefixWidget},
@@ -38,7 +45,7 @@ class SsStaffAdmin(ImportExportModelAdmin):
     list_display = ('last_name', 'first_name', 'type', 'salutation','ssoffice','tel', 'tel_ext',
                     )
     list_editable = ('type', 'ssoffice', 'tel', 'tel_ext')
-    # list_filter = ('ssoffice', 'type')
+    # list_filter = ['ssoffice']
 
     #
     # formfield_overrides = {

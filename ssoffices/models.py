@@ -40,8 +40,8 @@ class SsOffice(models.Model):
         WSU = ('WSU', "Workload Support Unit (WSU)")
 
     id = models.BigAutoField(primary_key=True)
-    type = models.CharField(max_length=128, choices=SsOfficeTypes.choices, null=True, blank=True)
-    slug = models.CharField(max_length=128, null=True, blank=True, unique=True)
+    type = models.CharField(max_length=128, db_index=True, choices=SsOfficeTypes.choices, null=True, blank=True)
+    slug = models.CharField(max_length=128, db_index=True, null=True, blank=True, unique=True)
     display_name = models.CharField(max_length=128, null=True, blank=True)
     ssa_site_code = models.CharField(max_length=128, null=True, blank=True)
     ssa_office_name = models.CharField(max_length=128, null=True, blank=True)
@@ -123,6 +123,7 @@ class SsStaff(models.Model):
                                  related_name='staff')
     type = models.CharField(choices=StaffTypes.choices,
                             max_length=128,
+                            db_index=True,
                             blank=True, null=True)
     first_name = models.CharField(max_length=128,
                                   blank=True, null=True)

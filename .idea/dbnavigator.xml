@@ -62,6 +62,9 @@
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
+  <component name="DBNavigator.Project.ParserDiagnosticsManager">
+    <diagnostics-history />
+  </component>
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
     <recently-used-interfaces />
   </component>
@@ -73,7 +76,7 @@
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
-          <database-version value="13.4" />
+          <database-version value="13.5" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />

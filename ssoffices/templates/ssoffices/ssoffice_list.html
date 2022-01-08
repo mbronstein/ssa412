@@ -1,11 +1,12 @@
-{% load django_tables2 %}
+
+
+{% extends "base.html" %}
 {% load render_table from django_tables2 %}
-<!doctype html>
-<html>
-    <head>
-        <title>SSA Offices</title>
-    </head>
-    <body>
-        {% render_table object_list %}
-    </body>
-</html>
+
+{% block content %}
+    <h2>SsOffices</h2>
+
+
+  {% render_table table  %}
+
+{% endblock %}

@@ -2,8 +2,9 @@
 Base settings to build other settings files upon.
 """
 from pathlib import Path
-
 import environ
+# from django.contrib.admin import site
+# import adminactions.actions as actions
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent   # ssa412/
 APPS_DIR = ROOT_DIR / "ssa412"
@@ -47,7 +48,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -78,6 +79,9 @@ THIRD_PARTY_APPS = [
     "django_filters",
     "post_office",
     "import_export",
+    "django_tables2",
+    "adminactions",
+    # "admin_auto_filters",
 ]
 
 LOCAL_APPS = [
@@ -310,6 +314,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_FILTER_BACKENDS": ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -327,3 +332,9 @@ PHONENUMBER_DEFAULT_REGION = 'US'
 IMPORT_EXPORT_USE_TRANSACTIONS=True
 
 ALLOWED_HOSTS=env('ALLOWED_HOSTS').split(',')
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+#adminactions
+
+# actions.add_to_site(site)
