@@ -127,7 +127,7 @@ class SsStaff(models.Model):
                             blank=True, null=True)
     first_name = models.CharField(max_length=128,
                                   blank=True, null=True)
-    last_name = models.CharField(max_length=128)
+    last_name = models.CharField(max_length=128, blank=True, null=True)
     salutation = models.CharField(max_length=128,
                                   blank=True, null=True)
     # honorific = models.CharField(max_length=128,
