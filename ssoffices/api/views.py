@@ -8,12 +8,12 @@ from ssoffices.api.serializers import SsOfficeSerializer, SsStaffSerializer
 class SsOfficeViewSet(ModelViewSet):
     serializer_class = SsOfficeSerializer
     queryset = SsOffice.objects.all()
-    filterset_fields = ['city', 'type']
+    filterset_fields = ['city', 'state', 'type']
 
 
 class SsStaffViewSet(ModelViewSet):
     serializer_class = SsStaffSerializer
-    filterset_fields = ['id', 'last_name', 'type' ]
+    filterset_fields = ['last_name', 'first_name','type' ]
 
     def get_queryset(self):
         queryset = SsStaff.objects.all()
