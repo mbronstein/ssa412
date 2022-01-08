@@ -13,7 +13,7 @@ class SsOfficeViewSet(ModelViewSet):
 
 class SsStaffViewSet(ModelViewSet):
     serializer_class = SsStaffSerializer
-    filterset_fields = ['last_name', 'first_name','type' ]
+    filterset_fields = ['last_name', 'first_name','type','city', 'state' ]
 
     def get_queryset(self):
         queryset = SsStaff.objects.all()
