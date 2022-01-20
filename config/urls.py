@@ -18,7 +18,6 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("ssa412.users.urls", namespace="users")),
-    # path("accounts/", include("allauth.urls")),
     path("adminactions/", include('adminactions.urls')),
     # path("send-email", EmailView.as_view(), name="send-email"),
     # Your stuff: custom urls includes go here
