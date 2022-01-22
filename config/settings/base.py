@@ -16,6 +16,8 @@ if READ_DOT_ENV_FILE:
     env.read_env(str(ROOT_DIR / ".env"))
 
 DEBUG = env.str("DEBUG")
+DEBUG_TOOLBAR = env.str("DEBUG_TOOLBAR")
+SILK = env.str("SILK")   #SET DEFAULT?
 
 SECRET_KEY = env.str("SECRET_KEY")
 USE_TZ = True
@@ -23,35 +25,18 @@ TIME_ZONE = "UTC"
 LANGUAGE_CODE = "en-us"
 SITE_ID = 1
 
-#local related probably dont need
-# https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
-USE_I18N = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
-USE_L10N = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
-LOCALE_PATHS = [str(ROOT_DIR / "locale")]
-
-
-# DATABASES
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
-# Parse database connection url strings
-# like psql://user:pass@127.0.0.1:8458/db
 DATABASES = {
-    #see django-environ for env.db()
+    # see django-environ for env.db()
     'default': env.db(),
 }
 
 # URLS
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = "config.urls"
-# https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+
+# WSGI
 WSGI_APPLICATION = "wsgi.application"
 
 # APPS
-# ------------------------------------------------------------------------------
 DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -81,20 +66,19 @@ THIRD_PARTY_APPS = [
     # "admin_auto_filters",
 ]
 
+# MY APPS
 LOCAL_APPS = [
     "ssa412.users.apps.UsersConfig",
     "ssoffices.apps.SsofficesConfig",
     "matters.apps.MattersConfig",
     "products.apps.ProductsConfig"
-    # Your stuff: custom apps go here
+
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # MIGRATIONS
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
 MIGRATION_MODULES = {"sites": "ssa412.contrib.sites.migrations"}
 
 # AUTHENTICATION
@@ -103,12 +87,9 @@ MIGRATION_MODULES = {"sites": "ssa412.contrib.sites.migrations"}
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
-# https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
-# https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
-# https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = "account_login"
+LOGIN_REDIRECT_URL = "/"
+# LOGIN_URL = "account_login"
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -131,8 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # MIDDLEWARE
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -149,7 +128,6 @@ MIDDLEWARE = [
 ]
 
 # WhiteNoise
-# ------------------------------------------------------------------------------
 # http://whitenoise.evans.io/en/latest/django.html#using-whitenoise-in-development
 INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS  # noqa F405
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -157,30 +135,11 @@ STATIC_ROOT = str(ROOT_DIR / "staticfiles")
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
-
-
-# # ------------------------------------------------------------------------------
-# # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-# # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-
-# # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-# STATICFILES_DIRS = [str(APPS_DIR / "static")]
-# # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
-# STATICFILES_FINDERS = [
-#     "django.contrib.staticfiles.finders.FileSystemFinder",
-#     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-# ]
-
 # MEDIA
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 MEDIA_ROOT = str(APPS_DIR / "media")
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
 
 # TEMPLATES
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
     {
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
@@ -210,31 +169,24 @@ TEMPLATES = [
     }
 ]
 
-# https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 # http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # FIXTURES
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
 FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
 
 # SECURITY
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
 SESSION_COOKIE_HTTPONLY = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
 CSRF_COOKIE_HTTPONLY = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
 SECURE_BROWSER_XSS_FILTER = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "DENY"
 
+# SESSIONS
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 # EMAIL
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
     "EMAIL_BACKEND",
     default="django.core.mail.backends.smtp.EmailBackend",
@@ -243,7 +195,7 @@ EMAIL_BACKEND = env(
 POST_OFFICE = {
     'DEFAULT_PRIORITY' : 'now'
 }
-# https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
+
 EMAIL_TIMEOUT = 5
 EMAIL_HOST= env('EMAIL_HOST')
 EMAIL_USE_TLS= env('EMAIL_USE_TLS')
@@ -251,7 +203,7 @@ EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
-PDFTK_PATH = env('PDFTK_PATH')
+
 # ADMIN
 
 # ------------------------------------------------------------------------------
@@ -313,9 +265,8 @@ PHONENUMBER_DEFAULT_REGION = 'US'
 IMPORT_EXPORT_USE_TRANSACTIONS=True
 
 ALLOWED_HOSTS=env('ALLOWED_HOSTS').split(',')
+INTERNAL_IPS = env('INTERNAL_IPS').split(',')
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
-#adminactions
 
-# actions.add_to_site(site)
+PDFTK_PATH = env('PDFTK_PATH')
