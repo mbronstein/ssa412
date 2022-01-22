@@ -15,10 +15,6 @@ if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / ".env"))
 
-DEBUG = env.str("DEBUG")
-DEBUG_TOOLBAR = env.str("DEBUG_TOOLBAR")
-SILK = env.str("SILK")   #SET DEFAULT?
-
 SECRET_KEY = env.str("SECRET_KEY")
 USE_TZ = True
 TIME_ZONE = "UTC"
@@ -113,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # MIDDLEWARE
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  # can I leave this in even if toolbar not enabled?
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -187,14 +183,7 @@ X_FRAME_OPTIONS = "DENY"
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 # EMAIL
-EMAIL_BACKEND = env(
-    "EMAIL_BACKEND",
-    default="django.core.mail.backends.smtp.EmailBackend",
-)
-
-POST_OFFICE = {
-    'DEFAULT_PRIORITY' : 'now'
-}
+EMAIL_BACKEND = env("EMAIL_BACKEND")
 
 EMAIL_TIMEOUT = 5
 EMAIL_HOST= env('EMAIL_HOST')
@@ -203,15 +192,14 @@ EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
+# IF POST_OFFICE BEING USED
+POST_OFFICE = {
+    'DEFAULT_PRIORITY' : 'now'
+}
 
 # ADMIN
-
-# ------------------------------------------------------------------------------
-# Django Admin URL.
 ADMIN_URL = "admin/"
-# https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [("Mark Bronstein", "mark@bronsteinlaw.com")]
-# https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
 # LOGGING
@@ -264,9 +252,33 @@ PHONENUMBER_DEFAULT_REGION = 'US'
 #settings for django-import-export
 IMPORT_EXPORT_USE_TRANSACTIONS=True
 
-ALLOWED_HOSTS=env('ALLOWED_HOSTS').split(',')
-INTERNAL_IPS = env('INTERNAL_IPS').split(',')
-
-
-
 PDFTK_PATH = env('PDFTK_PATH')
+
+# ------------------------------------------------------------------------------
+SHELL_PLUS_POST_IMPORTS = (
+    ('ssoffices.api.serializers', '*'),
+    ('ssoffices.api.views', '*')
+)
+
+# DEBUG RELATED
+
+
+DEBUG = env.str("DEBUG")
+DEBUG_TOOLBAR = env.str("DEBUG_TOOLBAR")
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+
+SILK = env.str("SILK")
+if SILK:
+    INSTALLED_APPS += ["silk"]
+
+if DEBUG_TOOLBAR:
+    INSTALLED_APPS += ["debug_toolbar"]
+    # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
+    INTERNAL_IPS = ["127.0.0.1"]
+
+    DEBUG_TOOLBAR_CONFIG = {
+        "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
+        "SHOW_TEMPLATE_CONTEXT": True,
+    }
+
+
