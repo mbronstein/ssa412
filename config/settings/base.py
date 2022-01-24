@@ -226,6 +226,30 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
+# LOGGING
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#logging
+# See https://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s "
+            "%(process)d %(thread)d %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
+}
+
 # django-rest-framework
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
@@ -274,7 +298,9 @@ if SILK:
 if DEBUG_TOOLBAR:
     INSTALLED_APPS += ["debug_toolbar"]
     # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
-    INTERNAL_IPS = ["127.0.0.1"]
+    INTERNAL_IPS = env("INTERNAL_IPS").split(",")
+
+
 
     DEBUG_TOOLBAR_CONFIG = {
         "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
