@@ -62,7 +62,14 @@
                    <li class="nav-item">
                       <a class="nav-link" href="{% url '' %}">API Home</a>
             </li>
-
+            {% endif %}
+          {% if user.is_authenticated %}
+              Hi {{ user.username }}!
+              <p><a href="{% url 'logout' %}">Log Out</a></p>
+              <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+            {% else %}
+              <p>You are not logged in</p>
+              <a href="{% url 'login' %}">Log In</a>
             {% endif %}
           </ul>
         </div>
