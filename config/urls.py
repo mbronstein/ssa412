@@ -32,7 +32,7 @@ urlpatterns += [
     path("auth-token/", obtain_auth_token),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG is True:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
@@ -54,9 +54,9 @@ if settings.DEBUG:
         path("500/", default_views.server_error),
     ]
 
-if settings.DEBUG_TOOLBAR:
+if settings.DEBUG_TOOLBAR is True:
     import debug_toolbar
     urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
 
-if settings.SILK:
+if settings.SILK is True:
     urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]

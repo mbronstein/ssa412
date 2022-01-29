@@ -43,8 +43,8 @@ DJANGO_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.forms",
@@ -145,7 +145,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "silk.middleware.SilkyMiddleware",
+
 ]
 
 # WhiteNoise
@@ -317,15 +317,14 @@ DEBUG_TOOLBAR = env.str("DEBUG_TOOLBAR")
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
 
 SILK = env.str("SILK")
-if SILK:
+if SILK is True:
     INSTALLED_APPS += ["silk"]
+    MIDDLEWARE += ["silk.middleware.SilkyMiddleware"]
 
-if DEBUG_TOOLBAR:
+if DEBUG_TOOLBAR is True:
     INSTALLED_APPS += ["debug_toolbar"]
     # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
     INTERNAL_IPS = env("INTERNAL_IPS").split(",")
-
-
 
     DEBUG_TOOLBAR_CONFIG = {
         "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
