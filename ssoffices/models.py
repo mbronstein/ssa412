@@ -115,6 +115,7 @@ class SsStaff(models.Model):
         indexes = [
             models.Index(fields=['last_name','first_name']),
             models.Index(fields=['ssoffice']),
+            models.Index(fields=['type']),
         ]
 
     id = models.AutoField(primary_key=True)
