@@ -65,6 +65,9 @@ THIRD_PARTY_APPS = [
     "import_export",
     "django_tables2",
     "adminactions",
+    "axes",
+    "todo",
+
     # "admin_auto_filters",
 ]
 
@@ -87,7 +90,9 @@ MIGRATION_MODULES = {"sites": "ssa412.contrib.sites.migrations"}
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
-     # Needed to login by username in Django admin, regardless of `allauth`
+    # for django-axes login logger
+    'axes.backends.AxesBackend',
+    # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
@@ -145,6 +150,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "axes.middleware.AxesMiddleware",
 
 ]
 
@@ -310,6 +316,11 @@ SHELL_PLUS_POST_IMPORTS = (
 )
 
 # DEBUG RELATED
+REQUEST_LOGGER_FILTER = env.str('REQUEST_LOGGER_PATH_FILTER')
+REQUEST_LOGGER = env.str('REQUEST_LOGGER')
+if REQUEST_LOGGER is True:
+    MIDDLEWARE += ["ssa412.middleware.request_log.RequestLogMiddleware"]
+
 
 
 DEBUG = env.str("DEBUG")
@@ -331,4 +342,5 @@ if DEBUG_TOOLBAR is True:
         "SHOW_TEMPLATE_CONTEXT": True,
     }
 
+AXES_ENABLED=env.str("AXES_ENABLED")
 

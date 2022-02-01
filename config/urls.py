@@ -14,6 +14,7 @@ urlpatterns = [
     ),
     path("ssa/", include("ssoffices.urls")),
     # Django Admin, use {% url 'admin:index' %}
+    path('todo/', include('todo.urls', namespace="todo")),
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
