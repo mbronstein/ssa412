@@ -1,4 +1,4 @@
-#middleware/request_log.py
+# middleware/request_log.py
 # from: https://wilspi.com/post/tech/django-middleware-to-log-requests/
 # adapted by mb to add a PATH_FILTER settings variable
 """
@@ -12,6 +12,7 @@ from django.conf import settings
 
 request_logger = logging.getLogger(__name__)
 REQUEST_LOGGER_FILTER = settings.REQUEST_LOGGER
+
 
 class RequestLogMiddleware:
     """Request Logging Middleware."""

@@ -151,7 +151,7 @@ MIDDLEWARE = [
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
-
+    # "ssa412.middleware.RequestLogMiddleware"
 ]
 
 # WhiteNoise
@@ -257,29 +257,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
-# LOGGING
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#logging
-# See https://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        }
-    },
-    "root": {"level": "INFO", "handlers": ["console"]},
-}
+
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -317,17 +295,16 @@ SHELL_PLUS_POST_IMPORTS = (
 
 # DEBUG RELATED
 REQUEST_LOGGER_FILTER = env.str('REQUEST_LOGGER_PATH_FILTER')
-REQUEST_LOGGER = env.str('REQUEST_LOGGER')
-if REQUEST_LOGGER is True:
-    MIDDLEWARE += ["ssa412.middleware.request_log.RequestLogMiddleware"]
+REQUEST_LOGGER = env.bool('REQUEST_LOGGER')
 
 
 
-DEBUG = env.str("DEBUG")
-DEBUG_TOOLBAR = env.str("DEBUG_TOOLBAR")
+
+DEBUG = env.bool("DEBUG")
+DEBUG_TOOLBAR = env.bool("DEBUG_TOOLBAR")
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
 
-SILK = env.str("SILK")
+SILK = env.bool("SILK")
 if SILK is True:
     INSTALLED_APPS += ["silk"]
     MIDDLEWARE += ["silk.middleware.SilkyMiddleware"]
@@ -342,5 +319,5 @@ if DEBUG_TOOLBAR is True:
         "SHOW_TEMPLATE_CONTEXT": True,
     }
 
-AXES_ENABLED=env.str("AXES_ENABLED")
+AXES_ENABLED=env.bool("AXES_ENABLED")
 
