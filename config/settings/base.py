@@ -43,8 +43,6 @@ DJANGO_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
-    # 'allauth.socialaccount.providers.facebook',
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.forms",
@@ -99,21 +97,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
-    }
-}
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL =  '/admin'
+LOGIN_REDIRECT_URL =  '/'
 LOGIN_URL = "account_login"
 
 
@@ -129,9 +114,7 @@ PASSWORD_HASHERS = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -151,7 +134,7 @@ MIDDLEWARE = [
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
-    # "ssa412.middleware.RequestLogMiddleware"
+    "ssa412.middleware.RequestLogMiddleware"
 ]
 
 # WhiteNoise
@@ -293,22 +276,20 @@ SHELL_PLUS_POST_IMPORTS = (
     ('ssoffices.api.views', '*')
 )
 
-# DEBUG RELATED
-REQUEST_LOGGER_FILTER = env.str('REQUEST_LOGGER_PATH_FILTER')
-REQUEST_LOGGER = env.bool('REQUEST_LOGGER')
-
-
-
-
-DEBUG = env.bool("DEBUG")
-DEBUG_TOOLBAR = env.bool("DEBUG_TOOLBAR")
-ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
-
+#PROFILER
 SILK = env.bool("SILK")
+
 if SILK is True:
     INSTALLED_APPS += ["silk"]
     MIDDLEWARE += ["silk.middleware.SilkyMiddleware"]
 
+# DEBUG RELATED
+REQUEST_LOGGER_FILTER = env.str('REQUEST_LOGGER_PATH_FILTER')
+REQUEST_LOGGER = env.bool('REQUEST_LOGGER')
+
+DEBUG = env.bool("DEBUG")
+
+DEBUG_TOOLBAR = env.bool("DEBUG_TOOLBAR")
 if DEBUG_TOOLBAR is True:
     INSTALLED_APPS += ["debug_toolbar"]
     # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
@@ -319,5 +300,6 @@ if DEBUG_TOOLBAR is True:
         "SHOW_TEMPLATE_CONTEXT": True,
     }
 
+#AXES LOG IN ATTEMPT LOGGING
 AXES_ENABLED=env.bool("AXES_ENABLED")
 
