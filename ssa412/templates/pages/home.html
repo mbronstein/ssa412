@@ -1,9 +1,6 @@
 {% extends "base.html" %}%
 
 {% block content %}
-  {% for r in request.GET %}
-      {% if request.GET.r %}
-          {{r}} = {{request.GET.r}}
-      {% endif %}
-  {% endfor %}
+  REQUEST:
+  {{request}}
 {% endblock content %}

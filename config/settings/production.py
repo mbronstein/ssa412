@@ -120,9 +120,9 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "django.request": {
-            "handlers": ["mail_admins"],
-            "level": "ERROR",
-            "propagate": True,
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
         },
         "django.security.DisallowedHost": {
             "level": "ERROR",

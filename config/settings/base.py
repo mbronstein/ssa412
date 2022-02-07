@@ -65,6 +65,7 @@ THIRD_PARTY_APPS = [
     "adminactions",
     "axes",
     "todo",
+    "request_logging",
 
     # "admin_auto_filters",
 ]
@@ -134,7 +135,6 @@ MIDDLEWARE = [
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "axes.middleware.AxesMiddleware",
-    "ssa412.middleware.RequestLogMiddleware"
 ]
 
 # WhiteNoise
@@ -216,31 +216,6 @@ ADMIN_URL = "admin/"
 ADMINS = [("Mark Bronstein", "mark@bronsteinlaw.com")]
 MANAGERS = ADMINS
 
-# LOGGING
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#logging
-# See https://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        }
-    },
-    "root": {"level": "INFO", "handlers": ["console"]},
-}
-
-
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -283,9 +258,6 @@ if SILK is True:
     INSTALLED_APPS += ["silk"]
     MIDDLEWARE += ["silk.middleware.SilkyMiddleware"]
 
-# DEBUG RELATED
-REQUEST_LOGGER_FILTER = env.str('REQUEST_LOGGER_PATH_FILTER')
-REQUEST_LOGGER = env.bool('REQUEST_LOGGER')
 
 DEBUG = env.bool("DEBUG")
 
@@ -300,6 +272,4 @@ if DEBUG_TOOLBAR is True:
         "SHOW_TEMPLATE_CONTEXT": True,
     }
 
-#AXES LOG IN ATTEMPT LOGGING
-AXES_ENABLED=env.bool("AXES_ENABLED")
 
