@@ -15,11 +15,10 @@ if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / ".env"))
 
-SECRET_KEY = env.str("SECRET_KEY")
-USE_TZ = True
-TIME_ZONE = "UTC"
-LANGUAGE_CODE = "en-us"
-SITE_ID = 1
+USE_TZ = env.bool("USE_TZ", default=True)
+TIME_ZONE = env.bool("TIME_ZONE", default="UTC")
+LANGUAGE_CODE = env.bool("LANGUAGE_CODE", default="en-us")
+SITE_ID = env.str("SITE_ID", default=1)
 
 DATABASES = {
     # see django-environ for env.db()
@@ -99,7 +98,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
-LOGIN_REDIRECT_URL =  '/'
+LOGIN_REDIRECT_URL =  env("LOGIN_REDIRECT_URL", default='/')
 LOGIN_URL = "account_login"
 
 
@@ -188,24 +187,26 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
 
 # SECURITY
-SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_HTTPONLY = True
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = "DENY"
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+SECRET_KEY = env.str("SECRET_KEY")  # must be in .env (no default)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')  #must be in .env no default
+SESSION_COOKIE_HTTPONLY = env.bool("SESSION_COOKIE_HTTPONLY", default=True)
+CSRF_COOKIE_HTTPONLY = env.bool("CSRF_COOKIE_HTTPONLY", default=True)
+SECURE_BROWSER_XSS_FILTER = env.bool("SECURE_BROWSER_XSS_FILTER", default=True)
+X_FRAME_OPTIONS = env("X_FRAME_OPTIONS", default="DENY")
+
 
 # SESSIONS
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_ENGINE = env("SESSION_ENGINE", default='django.contrib.sessions.backends.cache')
 
 # EMAIL
-EMAIL_BACKEND = env("EMAIL_BACKEND")
-
-EMAIL_TIMEOUT = 5
-EMAIL_HOST= env('EMAIL_HOST')
-EMAIL_USE_TLS= env('EMAIL_USE_TLS')
-EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_BACKEND=env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
+EMAIL_TIMEOUT = env("EMAIL_TIMEOUT", default=5)
+EMAIL_HOST= env('EMAIL_HOST', default="smtp.gmail.com")
+EMAIL_USE_TLS= env.bool('EMAIL_USE_TLS', default=True)
+EMAIL_PORT = env("EMAIL_PORT", default=587)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
 
 # IF POST_OFFICE BEING USED
 POST_OFFICE = {
