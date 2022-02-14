@@ -1,12 +1,8 @@
 {% extends "base.html" %}%
 
 {% block content %}
-  Request: {{request}}
-  Request.cookies {{ request.cookies }}
+  <p>request.session.items: {{ request.session.items }}
+  </p>
+  <p>request.cookies.items: {{ request.cookies.items }}</p>
 
-  {% for k, v in request.items %}
-    {% for i in v %}
-        {{ i }}
-    {% endfor %}
-{% endfor %}
 {% endblock content %}
