@@ -1,0 +1,31 @@
+%FDF-1.4
+%‚„œ”
+1 0 obj
+<<
+/FDF <<
+/F (../../fixtures/output51553.pdf)
+/Fields [<<
+/T (Text1)
+>> <<
+/T (Text2)
+>> <<
+/Kids [<<
+/T (city)
+>> <<
+/T (first_name)
+>> <<
+/T (last_name)
+>>]
+/T (claimant)
+>>]
+/ID [<917F7AD5F4D5D6E754941DC62CC54B87> <917F7AD5F4D5D6E754941DC62CC54B87>]
+/UF (../../fixtures/output51553.pdf)
+>>
+/Type /Catalog
+>>
+endobj
+trailer
+<<
+/Root 1 0 R
+>>
+%%EOF

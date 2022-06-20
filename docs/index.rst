@@ -1,9 +1,9 @@
-.. mybasetemplate1 documentation master file, created by
+.. ssa412 documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to mybasetemplate1's documentation!
+Welcome to ssa412's documentation!
 ======================================================================
 
 .. toctree::

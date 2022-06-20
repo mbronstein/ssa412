@@ -8,12 +8,13 @@ from ssoffices.api.serializers import SsOfficeSerializer, SsStaffSerializer
 class SsOfficeViewSet(ModelViewSet):
     serializer_class = SsOfficeSerializer
     queryset = SsOffice.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['city', 'type']
+    filterset_fields = ['city', 'state', 'type']
 
 
 class SsStaffViewSet(ModelViewSet):
     serializer_class = SsStaffSerializer
-    queryset = SsStaff.objects.all()
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['last_name']
+    filterset_fields = ['last_name', 'first_name','type','city', 'state' ]
+
+    def get_queryset(self):
+        queryset = SsStaff.objects.all()
+        return self.get_serializer_class().setup_eager_loading(queryset)

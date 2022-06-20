@@ -8,10 +8,10 @@ from django.http import HttpRequest
 from django.test import RequestFactory
 from django.urls import reverse
 
-from mybasetemplate1.users.forms import UserChangeForm
-from mybasetemplate1.users.models import User
-from mybasetemplate1.users.tests.factories import UserFactory
-from mybasetemplate1.users.views import (
+from ssa412.users.forms import UserChangeForm
+from ssa412.users.models import User
+from ssa412.users.tests.factories import UserFactory
+from ssa412.users.views import (
     UserRedirectView,
     UserUpdateView,
     user_detail_view,

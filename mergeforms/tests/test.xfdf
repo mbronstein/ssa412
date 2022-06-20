@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xfdf xmlns="http://ns.adobe.com/xfdf/" xml:space="preserve">
+<fields>
+    <field name="contact.last_name"><value>Jones</value></field>
+    <field name="contact.first_name"><value>John</value></field>
+    <field name="contact.full_name"><value>John Jones</value></field>
+    <field name="contact.birth_date"><value>04/21/1953</value></field>
+    <field name="contact.ssn"><value>111-22-1234</value></field>
+    <field name="contact.address1"><value>9 Pine St.</value></field>
+    <field name="contact.address2"><value>Apt 2</value></field>
+    <field name="contact.city"><value>Boston</value></field>
+    <field name="contact.state"><value>MA</value></field>
+    <field name="contact.zipcode"><value>02466</value></field>
+    <field name="contact.city_state_zip"><value>Boston, MA 02466</value></field>
+    <field name="ssoffice:.address"><value>19 Radcliff Dr</value></field>
+    <field name="ssoffice:.city"><value>Boston</value></field>
+    <field name="ssoffice:.state"><value>MA</value></field>
+    <field name="ssoffice:.zipcode"><value>02111</value></field>
+    <field name="key1"><value>val1</value></field>
+</fields>
+/</xfdf>

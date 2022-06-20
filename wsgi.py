@@ -1,5 +1,5 @@
 """
-WSGI config for mybasetemplate1 project.
+WSGI config for ssa412 project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -20,14 +20,14 @@ from pathlib import Path
 from django.core.wsgi import get_wsgi_application
 
 # This allows easy placement of apps within the interior
-# mybasetemplate1 directory.
+# ssa412 directory.
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent
 sys.path.append(str(ROOT_DIR / "ssa412"))
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
 # if running multiple sites in the same mod_wsgi process. To fix this, use
 # mod_wsgi daemon mode with each site in its own daemon process, or use
 # os.environ["DJANGO_SETTINGS_MODULE"] = "config.settings.production"
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION

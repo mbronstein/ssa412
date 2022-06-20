@@ -1,1 +1,9 @@
-{% extends "base.html" %}
+{% extends "base.html" %}%
+
+{% block content %}
+  <p>request.session.session_key: {{ request.session.session_key }}</p>
+  <p>request.session.items: {{ request.session.items }}
+  </p>
+  <p>request.cookies.items: {{ request.cookies.items }}</p>
+
+{% endblock content %}

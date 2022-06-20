@@ -1,12 +1,16 @@
 from django.urls import path
-
-from ss411.ssoffices import views
+import ssoffices.views
+from .views import ssoffice_list, SsOfficeListView, SsOfficeUpdateView
+from django.contrib import admin
 
 app_name = 'ssoffices'
 
+
+
 urlpatterns = [
-    path('', views.SsOfficeListView.as_view(), name='list'),
-    path('<slug:slug>/', views.SsOfficeDetailView.as_view(), name='detail'),
+    path('offices', SsOfficeListView.as_view(), name='list'),
+    path('<slug:slug>/', SsOfficeUpdateView.as_view(), name='update'),
 ]
 
 
+# admin.site.site_header = 'LOMB Admin'

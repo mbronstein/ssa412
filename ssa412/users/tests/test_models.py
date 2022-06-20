@@ -1,6 +1,6 @@
 import pytest
 
-from mybasetemplate1.users.models import User
+from ssa412.users.models import User
 
 pytestmark = pytest.mark.django_db
 
