@@ -17,7 +17,7 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool("DJANGO_DEBUG", False)
+DEBUG = env.bool("DEBUG", True)
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -28,22 +28,22 @@ LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
-USE_I18N = True
+USE_I18N = False
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
-USE_L10N = True
+USE_L10N = False
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 
-DJANGO_SECRET_KEY = env.str("DJANGO_SECRET_KEY")
+DJANGO_SECRET_KEY = env.str("SECRET_KEY", default="1234567890abcd")
+ALLOWED_HOSTS= env.list("ALLOWED_HOSTS")
+
 
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-# Parse database connection url strings
-# like psql://user:pass@127.0.0.1:8458/db
 DATABASES = {
     #see django-environ for env.db()
     'default': env.db(),
@@ -75,9 +75,7 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "rest_framework",
-    "rest_framework.authtoken",
-    "corsheaders",
+    # "corsheaders",
     "django_comments_xtd",
     "django_comments",
     "taggit",
@@ -239,12 +237,12 @@ POST_OFFICE = {
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 EMAIL_HOST= env('EMAIL_HOST')
-EMAIL_USE_TLS= env('EMAIL_USE_TLS')
+EMAIL_USE_TLS= env('EMAIL_USE_TLS', default=False)
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
-PDFTK_PATH = env('PDFTK_PATH')
+PDFTK_PATH = env('PDFTK_PATH', default="")
 # ADMIN
 
 # ------------------------------------------------------------------------------
@@ -294,16 +292,16 @@ ACCOUNT_ADAPTER = "ssa412.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = "ssa412.users.adapters.SocialAccountAdapter"
 
-# django-rest-framework
-# -------------------------------------------------------------------------------
-# django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-}
+# # django-rest-framework
+# # -------------------------------------------------------------------------------
+# # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": (
+#         "rest_framework.authentication.SessionAuthentication",
+#         "rest_framework.authentication.TokenAuthentication",
+#     ),
+#     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+# }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 CORS_URLS_REGEX = r"^/api/.*$"
@@ -311,3 +309,4 @@ CORS_URLS_REGEX = r"^/api/.*$"
 # ------------------------------------------------------------------------------
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
