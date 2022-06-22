@@ -12,9 +12,9 @@ urlpatterns = [
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
-    path("ssa/", include("ssoffices.urls")),
+    # path("ssa/", include("apps.ssoffices.urls")),
     # Django Admin, use {% url 'admin:index' %}
-    path('todo/', include('todo.urls', namespace="todo")),
+    # path('todo/', include('todo.urls', namespace="todo")),
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
@@ -25,13 +25,13 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# API URLS
-urlpatterns += [
-    # API base url
-    path("api/", include("config.api_router")),
-    # DRF auth token
-    path("auth-token/", obtain_auth_token),
-]
+# # API URLS
+# urlpatterns += [
+#     # API base url
+#     path("api/", include("config.api_router")),
+#     # DRF auth token
+#     path("auth-token/", obtain_auth_token),
+# ]
 
 if settings.DEBUG is True:
     # This allows the error pages to be debugged during development, just visit

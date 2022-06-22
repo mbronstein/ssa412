@@ -1,6 +1,4 @@
-from  pypdftk import fill_form
-from mergeforms.models import  MergeForm
-from mergeforms.utils import
+from apps.mergeforms.utils import
 
 class FormFillerException(Exception):
     pass

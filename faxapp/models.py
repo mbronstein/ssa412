@@ -16,7 +16,7 @@ class OutgoingFax(models.Model):
 
     id = models.BigAutoField(primary_key=True)
     recip_id = models.ForeignKey(on_delete=models.CASCADE, null=True, to="contacts")
-    matter_id = models.ForeignKey(on_delete=models.CASCADE, null=True, to="matters", related_name='faxes')
+    matter_id = models.ForeignKey(on_delete=models.CASCADE, null=True, to="apps.matters", related_name='faxes')
     uuid = models.UUIDField(default=uuid4)
     sender_name = models.CharField(max_length=128)
     sender_faxnum = models.CharField(max_length=128)

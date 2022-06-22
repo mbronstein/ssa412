@@ -9,7 +9,7 @@ ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent   # ssa412/
 APPS_DIR = ROOT_DIR / "ssa412"
 env = environ.Env()
 
-READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)  #mb changed default to true
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", True)  #mb changed default to true
 if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / ".env"))
@@ -18,6 +18,9 @@ if READ_DOT_ENV_FILE:
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = env.bool("DEBUG", True)
+
+DEBUG_TOOLBAR = env.bool("DEBUG_TOOLBAR", True)
+SILK=env.bool("SILK", True)
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -54,7 +57,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "ssa412.wsgi.application"
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -69,6 +72,7 @@ DJANGO_APPS = [
     "django.contrib.admin",
     "django.forms",
     "grappelli",
+
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -82,12 +86,13 @@ THIRD_PARTY_APPS = [
     "django_extensions",
     "django_filters",
     "post_office",
+    "silk",
 ]
 
 LOCAL_APPS = [
-    "ssa412.users.apps.UsersConfig",
-    "ssoffices.apps.SsofficesConfig"
-    # Your stuff: custom apps go here
+      "ssa412.users.apps.UsersConfig",
+     #"apps.ssoffices.apps.SsofficesConfig"
+
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

@@ -1,7 +1,5 @@
 from django.urls import path
-import ssoffices.views
-from .views import ssoffice_list, SsOfficeListView, SsOfficeUpdateView
-from django.contrib import admin
+from .views import SsOfficeListView, SsOfficeUpdateView
 
 app_name = 'ssoffices'
 

@@ -24,8 +24,8 @@ class Matter(models.Model):
         CR = ('CR', 'Credit/Loan')
         MIS = ('MIS', "Miscelenous")
 
-    class MatterSubTypes(models.Model):
-        pass
+    # class MatterSubTypes(models.Model):
+    #     pass
 
     class StatusChoices(models.TextChoices):
         OP = ('OP', 'Open')
@@ -38,6 +38,7 @@ class Matter(models.Model):
                             null=True,
                             blank=True)
     # subtypes = models.Many?
+
     slug = models.CharField(max_length=128,
                             null=True,
                             blank=True,

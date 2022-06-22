@@ -1,10 +1,10 @@
 from django.conf import settings
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
-from ssa412.users.api.views import UserViewSet
-from ssoffices.api.views import SsOfficeViewSet, SsStaffViewSet
-from matters.api.views import MatterViewSet
-from products.api.views import ProductViewSet
+from ssa412.users import UserViewSet
+from apps.ssoffices import SsOfficeViewSet, SsStaffViewSet
+from apps.matters.api.views import MatterViewSet
+from apps.products.api import ProductViewSet
 # from faxapp.api.views import OutgoingFaxViewSet)
 
 if settings.DEBUG:

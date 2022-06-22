@@ -40,12 +40,12 @@ admin.site.register(SsOffice, SsOfficeAdmin)
 class SsStaffAdmin(ImportExportModelAdmin):
     readonly_fields = ('created_by', 'last_modified_by')
     search_fields = ["last_name", "slug"]
-    ordering = ["last_name", 'first_name', "ssoffice"]
+    ordering = ["last_name", 'first_name', "ss_office"]
     #todo add personal fax
-    list_display = ('last_name', 'first_name', 'type', 'salutation','ssoffice','tel', 'tel_ext',
+    list_display = ('last_name', 'first_name', 'staff_type', 'salutation','ss_office','tel', 'tel_ext',
                     )
-    list_editable = ('type', 'ssoffice', 'tel', 'tel_ext')
-    # list_filter = ['ssoffice']
+    list_editable = ('staff_type', 'ss_office', 'tel', 'tel_ext')
+    # list_filter = ['ss_office']
 
     #
     # formfield_overrides = {

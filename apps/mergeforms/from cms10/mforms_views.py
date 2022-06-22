@@ -1,8 +1,8 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import authentication
-from mergeforms.serializers import MergeFormListSerializer, MergeFormSerializer
-from mergeforms.models import MergeForm
+from apps.mergeforms.serializers import MergeFormListSerializer, MergeFormSerializer
+from apps.mergeforms.models import MergeForm
 
 
 # from todoapp.contacts.models import Contact

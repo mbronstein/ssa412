@@ -1,9 +1,8 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.viewsets import ModelViewSet
-from ssoffices.models import SsOffice, SsStaff
+from apps.ssoffices.models import SsOffice, SsStaff
 
 
-from ssoffices.api.serializers import SsOfficeSerializer, SsStaffSerializer
+from apps.ssoffices.api.serializers import SsOfficeSerializer, SsStaffSerializer
 
 class SsOfficeViewSet(ModelViewSet):
     serializer_class = SsOfficeSerializer

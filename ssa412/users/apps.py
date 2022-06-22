@@ -8,6 +8,6 @@ class UsersConfig(AppConfig):
 
     def ready(self):
         try:
-            import ssa412.users.signals  # noqa F401
+            from ssa412 import users
         except ImportError:
             pass

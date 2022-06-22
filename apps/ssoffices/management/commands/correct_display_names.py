@@ -1,20 +1,46 @@
 from django.core.management.base import BaseCommand
-from ssoffices.models import SsOffice
+from apps.ssoffices.models import SsOffice
 import os
 import csv
 
 
 class Command(BaseCommand):
-    help = 'our help string comes here'
+    help = ('our help string comes here')
+
+    def _fix_recs(self):
+
+        rows = SsOffice.objects.all()
+        for row in rows:
+            # correct displayname
+
+            # # correct uncapitalized state names
+            # padded_state_code = f" {row.state.lower()} "
+            # if row.display_name.find(padded_state_code) >= 0:
+            #     new_display_name  = row.display_name.replace(padded_state_code, f" {row.state} ")
+            #     row.display_name = new_display_name
+            #     row.save()
+
+            # if len(row.display_name.split(" ")) > 3:
+            #     word2 = row.display_name.split(" ")[1]
+            #     new_display_name = row.display_name.replace(word2, word2.capitalize())
+            #     row.display_name = new_display_name
+            #
+            # if len(row.display_name.split(" ")) > 4:
+            #     word3 = row.display_name.split(" ")[2]
+            #     new_display_name = row.display_name.replace(word3, word3.capitalize())
+            #     row.display_name = new_display_name
+
+            for s in ('North', 'South', 'East', 'West'):
+                if row.display_name.find(s.lower()) >= 0:
+                    row.display_name = row.display_name.replace(s.lower(), s.upper())
+
+            row.save()
 
     def _import_recs(self):
         fn = "foimportastext.csv"
         ScriptDir = os.path.dirname(os.path.abspath(__file__))
         filepath = os.path.join(ScriptDir, fn)
         with open(filepath, "r") as data:
-
-
-
             for o in csv.DictReader(data):
                 try:
                     newSSO = SsOffice()
@@ -42,4 +68,5 @@ class Command(BaseCommand):
                     print()
 
     def handle(self, *args, **options):
-        self._import_recs()
+        self._fix_recs()
+
